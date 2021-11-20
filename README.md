@@ -13,7 +13,7 @@ Source code for Bi-Channel Co-clustering on HeterogeneousInformation Networks
 - PyTorch 1.7
 - A Nvidia GPU with cuda 11.2
 
-## Data
+## Datasets
 
 * The datasets we used are placed in ./datasets
 
