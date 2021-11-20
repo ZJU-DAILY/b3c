@@ -22,7 +22,7 @@ Source code for Bi-Channel Co-clustering on HeterogeneousInformation Networks
 1. Running example on ACM
 
    ```shell
-   python main.py --dataset ACM --input_view 0 --lr 0.005 --n_clusters 3 --ntype P
+   python run_acm.py
    ```
 
 
