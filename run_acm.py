@@ -80,7 +80,6 @@ if __name__ == '__main__':
     parser.add_argument('--lr', type=float, default=0.0005)
     parser.add_argument('--n_clusters', type=int, default=3)
     parser.add_argument('--hidden', nargs='+', type=int, default=[32, 32])
-    parser.add_argument('--batch_size', type=int, default=64)
     parser.add_argument('--out', type=int, default=32)
     parser.add_argument('--dropout', type=float, default=0.)
     parser.add_argument('--seed', type=int, default=123)
@@ -91,55 +90,6 @@ if __name__ == '__main__':
     device = torch.device('cuda' if args.cuda else 'cpu')
 
     args.dataset = 'ACM'
-
-    #
-    # for l in lamd:
-    #     for b in beta:
-    #         for g in gamma:
-    #             for i in range(5):
-    # for i in range(5):
-    #     paper, author, pa, cc = preest()
-    #     train_cc(paper, author, cc, kl_epochs=args.kl_epochs, lr=args.lr, n_clusters=args.n_clusters, device=device,
-    #              bipart=pa, lamb=10, beta=0, gamma=0)
-    #
-    # for i in range(5):
-    #     paper, author, pa, cc = preest()
-    #     train_cc(paper, author, cc, kl_epochs=args.kl_epochs, lr=args.lr, n_clusters=args.n_clusters, device=device,
-    #              bipart=pa, lamb=10, beta=1, gamma=0)
-    #
-    # for i in range(5):
-    #     paper, author, pa, cc = preest()
-    #     train_cc(paper, author, cc, kl_epochs=args.kl_epochs, lr=args.lr, n_clusters=args.n_clusters, device=device,
-    #              bipart=pa, lamb=10, beta=10, gamma=0)
-    #
-    # for b in [1, 10]:
-    #     for g in [0.1, 1, 10]:
-    #         for i in range(5):
-    #             paper, author, pa, cc = preest()
-    #             train_cc(paper, author, cc, kl_epochs=args.kl_epochs, lr=args.lr, n_clusters=args.n_clusters,
-    #                      device=device,
-    #                      bipart=pa, lamb=10, beta=b, gamma=g)
-
-    lamd = [0.001, 0.01, 0.1, 1.0, 10.0, 100.0]  # 10
-    beta = [0.001, 0.01, 0.1, 1.0, 10.0, 100.0]  #
-    gamma = [0.001, 0.01, 0.1, 1.0, 10.0, 100.0]
-
-    for l in lamd:
-        for i in range(5):
-            paper, author, pa, cc = preest()
-            train_cc(paper, author, cc, kl_epochs=args.kl_epochs, lr=args.lr, n_clusters=args.n_clusters,
-                     device=device, bipart=pa, lamb=l, beta=0, gamma=0)
-
-    for b in beta:
-        for g in [0.1, 1, 10]:
-            for i in range(5):
-                paper, author, pa, cc = preest()
-                train_cc(paper, author, cc, kl_epochs=args.kl_epochs, lr=args.lr, n_clusters=args.n_clusters,
-                         device=device, bipart=pa, lamb=10, beta=b, gamma=g)
-
-    for g in gamma:
-        for b in [1, 10]:
-            for i in range(5):
-                paper, author, pa, cc = preest()
-                train_cc(paper, author, cc, kl_epochs=args.kl_epochs, lr=args.lr, n_clusters=args.n_clusters,
-                         device=device, bipart=pa, lamb=10, beta=b, gamma=g)
+	
+	paper, author, pa, cc = preest()
+    train_cc(paper, author, cc, kl_epochs=args.kl_epochs, lr=args.lr, n_clusters=args.n_clusters,device=device, bipart=pa, lamb=l0, beta=1, gamma=0.1)

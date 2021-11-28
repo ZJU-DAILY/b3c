@@ -55,7 +55,7 @@ class GraphConvolution(Module):
 
 class InnerProductDecoder(Module):
 
-    def __init__(self, in_features, dropout=0., act=F.sigmoid):  # todo:use sigmoid or not
+    def __init__(self, in_features, dropout=0., act=F.sigmoid): 
         super(InnerProductDecoder, self).__init__()
 
         self.in_features = in_features

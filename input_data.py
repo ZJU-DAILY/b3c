@@ -3,7 +3,6 @@ import pickle as pkl
 # import networkx as nx
 import scipy.sparse as sp
 import scipy.io as sio
-from sklearn.decomposition import PCA
 
 
 def parse_index_file(filename):
@@ -37,29 +36,13 @@ def genSamples(data, numView):
 
 
 def load_data(dataset, ntype):
-    # load the data: x, tx, allx, graph
-    # if dataset == "ACM":
-    #     dataset_path = "data/ACM3025.mat"
-    # elif dataset == "DBLP":
-    #     dataset_path = "data/DBLP4057_GAT_with_idx.mat"
-    # elif dataset == "IMDB":
-    #     dataset_path="data/imdb5k.mat"
 
     if dataset == "ACM":
-        dataset_path = "gtn/acm_w_alabels.mat"
-        # dataset_path = "data/ACM3025.mat"
+        dataset_path = "data/acm_w_alabels.mat"
     elif dataset == "DBLP":
-        dataset_path = "heco/dblp_w_plabels.mat"
+        dataset_path = "data/dblp_w_plabels.mat"
     elif dataset == "IMDB":
-        dataset_path = "magnn/imdb_w_dlabels.mat"
-        # dataset_path="gtn/imdb.mat"
-
-    # if dataset == "ACM":
-    #     dataset_path = "/home/yau/hete_embedding/B3C/gtn/acm_w_alabels.mat"
-    # elif dataset == "DBLP":
-    #     dataset_path = "/home/yau/hete_embedding/B3C/heco/dblp_w_plabels.mat"
-    # elif dataset == "IMDB":
-    #     dataset_path="/home/yau/hete_embedding/B3C/magnn/imdb_w_dlabels.mat"
+        dataset_path = "data/imdb_w_dlabels.mat"
 
     data = sio.loadmat(dataset_path)
 
@@ -77,7 +60,6 @@ def load_data(dataset, ntype):
 
 
     elif dataset == "DBLP":  # A-P
-
         if ntype == "A":
             truelabels, truefeatures = data['labels'], data['a_fea'].A.astype(float)
             rownetworks = np.array([(data['APA']).tolist(), (data['APCPA']).tolist(), (data['APTPA']).tolist()])
@@ -88,10 +70,9 @@ def load_data(dataset, ntype):
             linkCount = data['PAP'] + data['PCP'] + data['PTP']
 
     elif dataset == "IMDB":  # M-D
-        # truelabels, truefeatures = data['labels'], data['m_fea'].astype(float)
-        # N = truefeatures.shape[0]
-        # rownetworks = np.array([(data['MAM']).tolist(), (data['MDM']).tolist()])
-        # linkCount = data['MAM'] + data['MDM']
+        truelabels, truefeatures = data['labels'], data['m_fea'].astype(float)
+		rownetworks = np.array([(data['MAM']).tolist(), (data['MDM']).tolist()])
+		linkCount = data['MAM'] + data['MDM']
 
         truelabels, truefeatures = data['d_labels'], data['d_fea'].astype(float)
         N = truefeatures.shape[0]

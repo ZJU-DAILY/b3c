@@ -15,15 +15,12 @@ def format_data(data_name,ntype='P'):
         adj_orig = rownetworks[v]
         adj_orig = adj_orig - sp.dia_matrix((adj_orig.diagonal()[np.newaxis, :], [0]),
                                             shape=adj_orig.shape)  # 去self loop
-        # adj_orig.eliminate_zeros()
         adjs_orig.append(adj_orig)
     adjs_label = rownetworks
 
     adjs_orig = np.array(adjs_orig)
     adjs = adjs_orig
-    # if FLAGS.features == 0:
-    #     features = sp.identity(features.shape[0])  # featureless
-
+	
     # Some preprocessing
     adjs_norm = preprocess_graph(adjs)  # D(-1/2) * A * D(-1/2)
     # adjs_norm = preprocess_graph_row(adjs)  # D(-1/2) * A * D(-1/2)
@@ -39,7 +36,7 @@ def format_data(data_name,ntype='P'):
 
     features = features
     num_features = features.shape[1]
-    # features_nonzero = features[1].shape[0]
+
     fea_pos_weights = float(features.shape[0] * features.shape[1] - features.sum()) / features.sum()
     pos_weights = []
     norms = []
